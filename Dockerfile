@@ -17,6 +17,6 @@ WORKDIR /root/
 
 COPY --from=builder /app/file_rest_api .
 
-ENV DATABASE_URL=postgres://postgres:postgres@db/financial_db?sslmode=disable
+ENV DATABASE_URL=postgres://postgres@db:5432/financial_db?sslmode=disable
 
 CMD ["./file_rest_api"]

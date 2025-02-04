@@ -1,4 +1,5 @@
-CREATE TABLE transactions (
+-- +goose Up
+CREATE TABLE IF NOT EXISTS transactions (
     id SERIAL PRIMARY KEY,
     id_users INT REFERENCES users(id) ON DELETE CASCADE,
     amount DECIMAL(10, 2) NOT NULL,
@@ -6,7 +7,7 @@ CREATE TABLE transactions (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO transactions (user_id, amount, operation) VALUES
+--Insert
 (1, 150.00, 'deposit'),
 (1, 50.00, 'withdraw'),
 (2, 200.00, 'deposit'),
@@ -17,3 +18,6 @@ INSERT INTO transactions (user_id, amount, operation) VALUES
 (5, 200.00, 'deposit'),
 (5, 100.00, 'transfer'),
 (6, 20.00, 'transfer');
+
+-- +goose Down
+DROP TABLE transactions;
