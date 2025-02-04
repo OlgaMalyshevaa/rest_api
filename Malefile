@@ -1,0 +1,26 @@
+APP_NAME=file_rest_api
+DOCKER_COMPOSE=docker-compose
+
+#create image
+build:
+ $(DOCKER_COMPOSE) build
+
+#run containerrs
+up:
+ $(DOCKER_COMPOSE) up
+
+#stop containers
+down:
+ $(DOCKER_COMPOSE) down
+
+#run migrations
+migrate:
+ $(DOCKER_COMPOSE) run app goose up
+
+#run app
+run:
+ $(DOCKER_COMPOSE) up --build
+
+#run tests
+test:
+ go test ./tests
