@@ -18,5 +18,5 @@ INSERT INTO users (name, balance) VALUES
 
 
 -- +goose Down
-DROP TABLE users;
+DROP TABLE IF EXISTS users;
 
