@@ -1,13 +1,15 @@
 -- +goose Up
 CREATE TABLE IF NOT EXISTS transactions (
     id SERIAL PRIMARY KEY,
-    id_users INT REFERENCES users(id) ON DELETE CASCADE,
-    amount DECIMAL(10, 2) NOT NULL,
+    user_id INT NOT NULL,
+    amount DECIMAL (10, 2) NOT NULL,
     operation VARCHAR(50) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
---Insert
+-- Insert
+INSERT INTO transactions (user_id, amount, operation) VALUES
 (1, 150.00, 'deposit'),
 (1, 50.00, 'withdraw'),
 (2, 200.00, 'deposit'),
@@ -20,4 +22,4 @@ CREATE TABLE IF NOT EXISTS transactions (
 (6, 20.00, 'transfer');
 
 -- +goose Down
-DROP TABLE transactions;
+DROP TABLE IF EXISTS transactions;
